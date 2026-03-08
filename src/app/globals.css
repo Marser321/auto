@@ -1,0 +1,63 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  :root {
+    --background: #020617;
+    --foreground: #f8fafc;
+    --surface: #0f172a;
+    --surface-secondary: #1e293b;
+    --surface-tertiary: #334155;
+    --muted: #94a3b8;
+
+    /* Tema dinámico */
+    --brand-primary: #DC2626;
+    /* Rojo por defecto */
+    --brand-hover: #B91C1C;
+    --accent: var(--brand-primary);
+
+    --radius: 0.75rem;
+  }
+
+  .theme-gold {
+    --brand-primary: #D4AF37;
+    --brand-hover: #B8860B;
+  }
+
+  .theme-blue {
+    --brand-primary: #2563EB;
+    --brand-hover: #1D4ED8;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-white/5;
+  }
+
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] selection:bg-accent;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-accent;
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+}
