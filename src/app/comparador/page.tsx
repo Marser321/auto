@@ -142,7 +142,10 @@ export default function ComparadorPage() {
 
                 {/* Tabla de Comparación - Grid dinámico basado en elementos 1x 2x 3x */}
                 <div className="w-full overflow-x-auto pb-6">
-                    <div className={`grid grid-cols-${vehiculos.length + 1} gap-4 min-w-[800px]`}>
+                    <div
+                        className="grid gap-4 min-w-[800px]"
+                        style={{ gridTemplateColumns: `repeat(${vehiculos.length + 1}, minmax(0, 1fr))` }}
+                    >
 
                         {/* Columna Cabeceras Fijas */}
                         <div className="col-span-1 pt-48 flex flex-col space-y-4">
