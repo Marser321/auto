@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Gauge, Settings2, Fuel, Calendar, Scale, X } from 'lucide-react';
 import { insforge, isInsforgeConfigured } from '@/lib/insforge';
+import { DEMO_VEHICLES_MAP, DEMO_PLACEHOLDER } from '@/lib/demo-vehicles';
 
 interface VehiculoBase {
     id: string;
@@ -31,14 +32,20 @@ type VehicleRow = {
     vehicle_images?: VehicleImageRow[] | null;
 };
 
-// Fallback por si la db está vacía en este context
-const DEMO_AUTOS: Record<string, VehiculoBase> = {
-    'demo-1': { id: 'demo-1', imagen_url: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80', marca: 'Volkswagen', modelo: 'Gol Trend 1.6', anio: 2019, precio: 12500, kilometraje: 65000, transmision: 'Manual', combustible: 'Nafta' },
-    'demo-2': { id: 'demo-2', imagen_url: 'https://images.unsplash.com/photo-1621007947382-34860ee6e992?w=600&q=80', marca: 'Chevrolet', modelo: 'Onix 1.0 Turbo', anio: 2022, precio: 16900, kilometraje: 28000, transmision: 'Automática', combustible: 'Nafta' },
-    'demo-3': { id: 'demo-3', imagen_url: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600&q=80', marca: 'Peugeot', modelo: '208 Active 1.2', anio: 2021, precio: 15500, kilometraje: 42000, transmision: 'Manual', combustible: 'Nafta' },
-    'demo-4': { id: 'demo-4', imagen_url: 'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=600&q=80', marca: 'Toyota', modelo: 'Hilux SRV 2.8', anio: 2018, precio: 35000, kilometraje: 115000, transmision: 'Automática', combustible: 'Diésel' },
-    'demo-5': { id: 'demo-5', imagen_url: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&q=80', marca: 'Renault', modelo: 'Kwid Zen 1.0', anio: 2020, precio: 10800, kilometraje: 55000, transmision: 'Manual', combustible: 'Nafta' },
-    'demo-6': { id: 'demo-6', imagen_url: 'https://images.unsplash.com/photo-1611016186353-9af58c69a533?w=600&q=80', marca: 'Ford', modelo: 'Fiesta Kinetic Design', anio: 2017, precio: 11500, kilometraje: 89000, transmision: 'Manual', combustible: 'Nafta' },
+const hydrateDemo = (id: string): VehiculoBase | null => {
+    const vehiculo = DEMO_VEHICLES_MAP[id];
+    if (!vehiculo) return null;
+    return {
+        id: vehiculo.id,
+        imagen_url: vehiculo.imagen_url,
+        marca: vehiculo.marca,
+        modelo: vehiculo.modelo,
+        anio: vehiculo.anio,
+        precio: vehiculo.precio,
+        kilometraje: vehiculo.kilometraje,
+        transmision: vehiculo.transmision,
+        combustible: vehiculo.combustible,
+    };
 };
 
 function formatearPrecio(precio: number): string {
@@ -63,7 +70,7 @@ export default function ComparadorPage() {
 
         try {
             if (!isInsforgeConfigured) {
-                const hidratados = compIds.map((id: string) => DEMO_AUTOS[id]).filter(Boolean);
+                const hidratados = compIds.map((id: string) => hydrateDemo(id)).filter(Boolean) as VehiculoBase[];
                 setVehiculos(hidratados);
                 setCargando(false);
                 return;
@@ -79,7 +86,7 @@ export default function ComparadorPage() {
             if (rows.length > 0) {
                 const procesados = rows.map((v) => ({
                     id: v.id,
-                    imagen_url: v.vehicle_images?.[0]?.url || 'https://via.placeholder.com/600x400',
+                    imagen_url: v.vehicle_images?.[0]?.url || DEMO_PLACEHOLDER,
                     marca: v.marca,
                     modelo: v.modelo,
                     anio: v.anio,
@@ -92,11 +99,11 @@ export default function ComparadorPage() {
                 setVehiculos(procesados);
             } else {
                 // Caemos a los datos demo si están en localStorage (muy probable)
-                const hidratados = compIds.map((id: string) => DEMO_AUTOS[id]).filter(Boolean);
+                const hidratados = compIds.map((id: string) => hydrateDemo(id)).filter(Boolean) as VehiculoBase[];
                 setVehiculos(hidratados);
             }
         } catch {
-            const hidratados = compIds.map((id: string) => DEMO_AUTOS[id]).filter(Boolean);
+            const hidratados = compIds.map((id: string) => hydrateDemo(id)).filter(Boolean) as VehiculoBase[];
             setVehiculos(hidratados);
         } finally {
             setCargando(false);

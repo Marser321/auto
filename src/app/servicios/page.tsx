@@ -12,7 +12,7 @@ const SERVICIOS_PREMIUM = [
         subtitulo: 'Sesiones de estudio y exteriores',
         descripcion: 'Capturamos cada ángulo de tu vehículo con iluminación controlada y edición de nivel publicitario. Resaltamos los detalles que venden.',
         puntos: ['Resolución 4K', 'Edición avanzada (Color Grading)', 'Remoción de patentes y reflejos', 'Entrega en 24hs'],
-        imagen: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80',
+        imagen: '/demo/services/showroom.jpg',
         color: 'text-blue-400',
         bg: 'bg-blue-500/10'
     },
@@ -23,7 +23,7 @@ const SERVICIOS_PREMIUM = [
         subtitulo: 'Experiencia inmersiva interactiva',
         descripcion: 'Permití que tus clientes se suban al auto desde su celular. Un visor interactivo que elimina dudas y aumenta el deseo de compra.',
         puntos: ['Integración nativa WebGL', 'Hotspots de equipamiento', 'Compatible con VR', 'Visualización fluida'],
-        imagen: 'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&q=80',
+        imagen: '/demo/services/interior.jpg',
         color: 'text-accent',
         bg: 'bg-accent/10'
     },
@@ -34,7 +34,7 @@ const SERVICIOS_PREMIUM = [
         subtitulo: 'Viralidad para Instagram y TikTok',
         descripcion: 'Creamos videos dinámicos con música tendencia y transiciones impactantes. La mejor forma de conseguir interesados frescos via redes sociales.',
         puntos: ['Formato 9:16 vertical', 'Música licenciada', 'Edición de ritmo rápido', 'Optimizado para algoritmos'],
-        imagen: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80',
+        imagen: '/demo/services/workshop.jpg',
         color: 'text-purple-400',
         bg: 'bg-purple-500/10'
     }

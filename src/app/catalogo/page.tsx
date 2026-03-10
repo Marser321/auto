@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Search, SlidersHorizontal, X, Heart, Clock } from 'lucide-react';
 import VehicleCard from '@/components/VehicleCard';
 import { insforge, isInsforgeConfigured } from '@/lib/insforge';
+import { DEMO_VEHICLES, DEMO_PLACEHOLDER } from '@/lib/demo-vehicles';
 
 type VehicleImageRow = { url: string };
 type VehicleRow = {
@@ -31,20 +32,20 @@ type VehicleItem = {
 };
 
 // Datos demo fallback
-const VEHICULOS_DEMO = [
-    { id: 'demo-1', imagen_url: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80', marca: 'Volkswagen', modelo: 'Gol Trend 1.6', anio: 2019, precio: 12500, kilometraje: 65000, transmision: 'Manual', combustible: 'Nafta' },
-    { id: 'demo-2', imagen_url: 'https://images.unsplash.com/photo-1621007947382-34860ee6e992?w=600&q=80', marca: 'Chevrolet', modelo: 'Onix 1.0 Turbo', anio: 2022, precio: 16900, kilometraje: 28000, transmision: 'Automática', combustible: 'Nafta' },
-    { id: 'demo-3', imagen_url: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600&q=80', marca: 'Peugeot', modelo: '208 Active 1.2', anio: 2021, precio: 15500, kilometraje: 42000, transmision: 'Manual', combustible: 'Nafta' },
-    { id: 'demo-4', imagen_url: 'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=600&q=80', marca: 'Toyota', modelo: 'Hilux SRV 2.8', anio: 2018, precio: 35000, kilometraje: 115000, transmision: 'Automática', combustible: 'Diésel' },
-    { id: 'demo-5', imagen_url: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&q=80', marca: 'Renault', modelo: 'Kwid Zen 1.0', anio: 2020, precio: 10800, kilometraje: 55000, transmision: 'Manual', combustible: 'Nafta' },
-    { id: 'demo-6', imagen_url: 'https://images.unsplash.com/photo-1611016186353-9af58c69a533?w=600&q=80', marca: 'Ford', modelo: 'Fiesta Kinetic Design', anio: 2017, precio: 11500, kilometraje: 89000, transmision: 'Manual', combustible: 'Nafta' },
-    { id: 'demo-7', imagen_url: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=80', marca: 'Honda', modelo: 'Civic EX-L 2.0', anio: 2019, precio: 24500, kilometraje: 52000, transmision: 'Automática', combustible: 'Nafta' },
-    { id: 'demo-8', imagen_url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80', marca: 'Volkswagen', modelo: 'Nivus Highline', anio: 2023, precio: 28900, kilometraje: 15000, transmision: 'Automática', combustible: 'Nafta' },
-    { id: 'demo-9', imagen_url: 'https://images.unsplash.com/photo-1542282088-fe8426682b8f?w=600&q=80', marca: 'Fiat', modelo: 'Toro Volcano 2.0', anio: 2021, precio: 31000, kilometraje: 45000, transmision: 'Automática', combustible: 'Diésel' },
-];
+const VEHICULOS_DEMO: VehicleItem[] = DEMO_VEHICLES.map((v) => ({
+    id: v.id,
+    imagen_url: v.imagen_url,
+    marca: v.marca,
+    modelo: v.modelo,
+    anio: v.anio,
+    precio: v.precio,
+    kilometraje: v.kilometraje,
+    transmision: v.transmision,
+    combustible: v.combustible,
+}));
 
-const MARCAS = ['Todas', 'Volkswagen', 'Chevrolet', 'Peugeot', 'Toyota', 'Renault', 'Ford', 'Honda', 'Fiat'];
-const COMBUSTIBLES = ['Todos', 'Nafta', 'Diésel', 'Híbrido'];
+const MARCAS = ['Todas', ...Array.from(new Set(VEHICULOS_DEMO.map((v) => v.marca)))];
+const COMBUSTIBLES = ['Todos', 'Nafta', 'Diesel', 'Hibrido'];
 
 export default function CatalogoPage() {
     const [vehiculos, setVehiculos] = useState<VehicleItem[]>(VEHICULOS_DEMO);
@@ -74,7 +75,7 @@ export default function CatalogoPage() {
                     setVehiculos(
                         rows.map((v) => ({
                             id: v.id,
-                            imagen_url: v.vehicle_images?.[0]?.url || VEHICULOS_DEMO[0].imagen_url,
+                            imagen_url: v.vehicle_images?.[0]?.url || DEMO_PLACEHOLDER,
                             marca: v.marca,
                             modelo: v.modelo,
                             anio: v.anio,

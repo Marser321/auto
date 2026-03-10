@@ -7,43 +7,32 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import VehicleCard from '@/components/VehicleCard';
 import { insforge, isInsforgeConfigured } from '@/lib/insforge';
+import { DEMO_VEHICLES, DEMO_PLACEHOLDER } from '@/lib/demo-vehicles';
+
+type VehicleCardItem = {
+  id: string;
+  imagen_url: string;
+  marca: string;
+  modelo: string;
+  anio: number;
+  precio: number;
+  kilometraje: number;
+  transmision: string;
+  combustible: string;
+};
 
 // Datos de ejemplo mientras no haya datos en DB
-const VEHICULOS_DEMO = [
-  {
-    id: 'demo-1',
-    imagen_url: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80',
-    marca: 'Volkswagen',
-    modelo: 'Gol Trend 1.6',
-    anio: 2019,
-    precio: 12500,
-    kilometraje: 65000,
-    transmision: 'Manual',
-    combustible: 'Nafta',
-  },
-  {
-    id: 'demo-2',
-    imagen_url: 'https://images.unsplash.com/photo-1621007947382-34860ee6e992?w=600&q=80',
-    marca: 'Chevrolet',
-    modelo: 'Onix 1.0 Turbo',
-    anio: 2022,
-    precio: 16900,
-    kilometraje: 28000,
-    transmision: 'Automática',
-    combustible: 'Nafta',
-  },
-  {
-    id: 'demo-3',
-    imagen_url: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600&q=80',
-    marca: 'Peugeot',
-    modelo: '208 Active 1.2',
-    anio: 2021,
-    precio: 15500,
-    kilometraje: 42000,
-    transmision: 'Manual',
-    combustible: 'Nafta',
-  },
-];
+const VEHICULOS_DEMO: VehicleCardItem[] = DEMO_VEHICLES.slice(0, 3).map((v) => ({
+  id: v.id,
+  imagen_url: v.imagen_url,
+  marca: v.marca,
+  modelo: v.modelo,
+  anio: v.anio,
+  precio: v.precio,
+  kilometraje: v.kilometraje,
+  transmision: v.transmision,
+  combustible: v.combustible,
+}));
 
 const SERVICIOS = [
   {
@@ -77,7 +66,7 @@ type VehicleRow = {
 };
 
 export default function HomePage() {
-  const [vehiculos, setVehiculos] = useState(VEHICULOS_DEMO);
+  const [vehiculos, setVehiculos] = useState<VehicleCardItem[]>(VEHICULOS_DEMO);
 
   useEffect(() => {
     if (!isInsforgeConfigured) {
@@ -97,7 +86,7 @@ export default function HomePage() {
         if (rows.length > 0) {
           setVehiculos(rows.map((v) => ({
             id: v.id,
-            imagen_url: v.vehicle_images?.[0]?.url || VEHICULOS_DEMO[0].imagen_url,
+            imagen_url: v.vehicle_images?.[0]?.url || DEMO_PLACEHOLDER,
             marca: v.marca,
             modelo: v.modelo,
             anio: v.anio,

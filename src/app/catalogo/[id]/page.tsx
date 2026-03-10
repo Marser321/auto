@@ -12,6 +12,7 @@ import {
 import { insforge, isInsforgeConfigured } from '@/lib/insforge';
 import Viewer360Modal from '@/components/Viewer360Modal';
 import type { Hotspot360 } from '@/components/Viewer360';
+import { DEMO_VEHICLES, getDemoVehicleById } from '@/lib/demo-vehicles';
 
 // ─────────────────────────────────────────────
 // Tipos
@@ -48,31 +49,7 @@ interface Hotspot2D {
     tipo: 'damage' | 'luxury' | 'feature';
 }
 
-// ─────────────────────────────────────────────
-// Demo data
-// ─────────────────────────────────────────────
-const DEMO_VEHICULO: Vehiculo = {
-    id: 'demo-1',
-    vin: '1HGBH41JXMN109186',
-    marca: 'Mercedes-Benz',
-    modelo: 'C300 AMG Line',
-    anio: 2023,
-    precio: 58900,
-    kilometraje: 12000,
-    transmision: 'Automática',
-    combustible: 'Nafta',
-    color: 'Blanco Polar',
-    descripcion: 'Mercedes-Benz C300 AMG Line en impecable estado. Incluye techo panorámico, sistema de navegación, cámara 360°, asientos deportivos en cuero, iluminación ambiental de 64 colores y asistente de conducción activo.',
-    estado: 'disponible',
-    imagen_360_url: '/360/car-interior-2.jpg',
-};
-
-const DEMO_IMAGENES: Imagen[] = [
-    { id: '1', url: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80', tipo: 'hero', orden: 1 },
-    { id: '2', url: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80', tipo: 'gallery', orden: 2 },
-    { id: '3', url: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80', tipo: 'gallery', orden: 3 },
-    { id: '4', url: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800&q=80', tipo: 'gallery', orden: 4 },
-];
+const DEFAULT_DEMO = DEMO_VEHICLES[0];
 
 const DEMO_HOTSPOTS_2D: Hotspot2D[] = [
     { id: '1', pos_x: 25, pos_y: 40, titulo: 'Techo panorámico', descripcion: 'Techo panorámico de cristal con apertura eléctrica y cortina parasol.', tipo: 'luxury' },
@@ -123,8 +100,8 @@ export default function VDPPage() {
     const params = useParams();
     const id = params?.id as string;
 
-    const [vehiculo, setVehiculo] = useState<Vehiculo>(DEMO_VEHICULO);
-    const [imagenes, setImagenes] = useState<Imagen[]>(DEMO_IMAGENES);
+    const [vehiculo, setVehiculo] = useState<Vehiculo>(DEFAULT_DEMO);
+    const [imagenes, setImagenes] = useState<Imagen[]>(DEFAULT_DEMO.imagenes);
     const [hotspots2D, setHotspots2D] = useState<Hotspot2D[]>(DEMO_HOTSPOTS_2D);
     const [hotspots360, setHotspots360] = useState<Hotspot360[]>(DEMO_HOTSPOTS_360);
     const [imagenActiva, setImagenActiva] = useState(0);
@@ -132,7 +109,7 @@ export default function VDPPage() {
     const [mostrar360, setMostrar360] = useState(false);
 
     // Estado del Simulador
-    const [entregaInicial, setEntregaInicial] = useState<number>(DEMO_VEHICULO.precio * 0.3); // 30% default
+    const [entregaInicial, setEntregaInicial] = useState<number>(DEFAULT_DEMO.precio * 0.3); // 30% default
     const [plazoMeses, setPlazoMeses] = useState<number>(36);
 
     // Cálculo básico (simulado, TNA ~15%)
@@ -146,6 +123,14 @@ export default function VDPPage() {
 
     // Cargar datos reales
     useEffect(() => {
+        const demo = getDemoVehicleById(id);
+        if (demo) {
+            setVehiculo(demo);
+            setImagenes(demo.imagenes);
+            setEntregaInicial(demo.precio * 0.3);
+            return;
+        }
+
         if (!id || id.startsWith('demo-') || !isInsforgeConfigured) return;
 
         async function cargar() {
