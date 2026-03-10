@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Search, Wrench, Clock, CheckCircle2, AlertCircle, Calendar, User, Car, ArrowLeft, Loader2, MoreVertical, Trash2 } from 'lucide-react';
+import { Plus, Wrench, Clock, User, Car, ArrowLeft, Loader2, MoreVertical } from 'lucide-react';
 import Link from 'next/link';
 import { insforge } from '@/lib/insforge';
 
@@ -86,30 +86,6 @@ export default function WorkshopAdminPage() {
             console.error(err);
         } finally {
             setSaving(false);
-        }
-    };
-
-    const updateStatus = async (id: string, newStatus: string) => {
-        try {
-            const { error } = await insforge.database
-                .from('workshop_orders')
-                .update({ estado: newStatus, updated_at: new Date().toISOString() })
-                .eq('id', id);
-            if (error) throw error;
-            loadOrders();
-        } catch (err) {
-            alert('Error al actualizar estado');
-        }
-    };
-
-    const deleteOrder = async (id: string) => {
-        if (!confirm('¿Seguro que desea eliminar esta orden?')) return;
-        try {
-            const { error } = await insforge.database.from('workshop_orders').delete().eq('id', id);
-            if (error) throw error;
-            loadOrders();
-        } catch (err) {
-            alert('Error al eliminar orden');
         }
     };
 

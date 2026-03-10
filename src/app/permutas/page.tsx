@@ -1,6 +1,8 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
 import { useState, useRef } from 'react';
+import Link from 'next/link';
 import {
     User, Car, Camera, CheckCircle2, ChevronRight, ChevronLeft,
     Upload, X, Loader2, AlertCircle, PartyPopper
@@ -205,9 +207,9 @@ export default function PermutasPage() {
                     {demoMode && (
                         <p className="mt-3 text-xs text-amber-300/80">Modo demo: envío simulado.</p>
                     )}
-                    <a href="/" className="inline-block mt-8 px-8 py-3 bg-accent hover:bg-accent-hover text-white font-semibold rounded-xl transition-colors">
+                    <Link href="/" className="inline-block mt-8 px-8 py-3 bg-accent hover:bg-accent-hover text-white font-semibold rounded-xl transition-colors">
                         Volver al inicio
-                    </a>
+                    </Link>
                 </div>
             </div>
         );

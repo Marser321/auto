@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { Send, Loader2, CheckCircle2, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { insforge, isInsforgeConfigured } from '@/lib/insforge';
 
@@ -67,9 +68,9 @@ export default function ContactoPage() {
                     {demoMode && (
                         <p className="mt-3 text-xs text-amber-300/80">Modo demo: envío simulado.</p>
                     )}
-                    <a href="/" className="inline-block mt-6 px-6 py-3 bg-accent hover:bg-accent-hover text-white font-semibold rounded-xl transition-colors">
+                    <Link href="/" className="inline-block mt-6 px-6 py-3 bg-accent hover:bg-accent-hover text-white font-semibold rounded-xl transition-colors">
                         Volver al inicio
-                    </a>
+                    </Link>
                 </div>
             </div>
         );

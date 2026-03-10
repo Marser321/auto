@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -16,6 +17,19 @@ interface VehiculoBase {
     transmision: string;
     combustible: string;
 }
+
+type VehicleImageRow = { url: string };
+type VehicleRow = {
+    id: string;
+    marca: string;
+    modelo: string;
+    anio: number;
+    precio: number;
+    kilometraje: number;
+    transmision: string;
+    combustible: string;
+    vehicle_images?: VehicleImageRow[] | null;
+};
 
 // Fallback por si la db está vacía en este context
 const DEMO_AUTOS: Record<string, VehiculoBase> = {
@@ -61,8 +75,9 @@ export default function ComparadorPage() {
                 .select('*, vehicle_images(url)')
                 .in('id', compIds);
 
-            if (data && data.length > 0) {
-                const procesados = data.map((v: any) => ({
+            const rows = (data ?? []) as VehicleRow[];
+            if (rows.length > 0) {
+                const procesados = rows.map((v) => ({
                     id: v.id,
                     imagen_url: v.vehicle_images?.[0]?.url || 'https://via.placeholder.com/600x400',
                     marca: v.marca,
@@ -177,7 +192,11 @@ export default function ComparadorPage() {
                                 {/* Target Header (Img + Titulo) */}
                                 <Link href={`/catalogo/${v.id}`} className="block mb-6 h-40">
                                     <div className="aspect-[16/10] overflow-hidden rounded-xl mb-3 border border-white/5">
-                                        <img src={v.imagen_url} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                                        <img
+                                            src={v.imagen_url}
+                                            alt={`${v.marca} ${v.modelo}`}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                        />
                                     </div>
                                     <h3 className="font-bold text-lg text-white leading-tight hover:text-accent transition-colors">
                                         {v.marca} {v.modelo}

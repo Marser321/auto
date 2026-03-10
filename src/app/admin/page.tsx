@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import {
-    Car, Users, RefreshCcw, BarChart3, Plus, Eye, Trash2,
+    Car, Users, RefreshCcw, Plus,
     Wrench, FileText, ChevronRight, TrendingUp, AlertCircle,
-    CheckCircle2, Clock, DollarSign
+    CheckCircle2, Clock
 } from 'lucide-react';
 import Link from 'next/link';
 import { insforge } from '@/lib/insforge';
@@ -15,6 +15,8 @@ interface DashboardStats {
     taller: number;
     facturacion: number;
 }
+
+type InvoiceTotalRow = { total: number | string | null };
 
 export default function AdminPage() {
     const [stats, setStats] = useState<DashboardStats>({
@@ -39,11 +41,13 @@ export default function AdminPage() {
                 insforge.database.from('invoices').select('total'),
             ]);
 
+            const facturaRows = (facturas.data ?? []) as InvoiceTotalRow[];
+
             setStats({
                 vehiculos: vehiculos.count || 0,
                 clientes: clientes.count || 0,
                 taller: taller.count || 0,
-                facturacion: facturas.data?.reduce((acc: number, inv: any) => acc + Number(inv.total), 0) || 0,
+                facturacion: facturaRows.reduce((acc, inv) => acc + Number(inv.total ?? 0), 0),
             });
         } catch (err) {
             console.error('Error cargando stats:', err);

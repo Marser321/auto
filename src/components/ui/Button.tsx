@@ -41,15 +41,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant, size, asChild = false, ...props }, ref) => {
         // Patrón robusto para asChild con motion
         const Comp = asChild ? Slot : 'button';
-        const MotionComp = motion(Comp as any);
+        const MotionComp = motion(Comp as React.ElementType);
 
         return (
             <MotionComp
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className={cn(buttonVariants({ variant, size, className }))}
-                ref={ref as any}
-                {...(props as any)}
+                ref={ref as React.Ref<HTMLElement>}
+                {...(props as HTMLMotionProps<'button'>)}
             />
         );
     }

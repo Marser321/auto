@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
@@ -127,7 +128,7 @@ export default function NewVehiclePage() {
                             tipo: index === 0 ? 'main' : 'gallery', // El primero es el principal
                             orden: index
                         };
-                    } catch (uploadErr: any) {
+                    } catch (uploadErr: unknown) {
                         console.error(`Error subiendo imagen ${index}:`, uploadErr);
                         return null; // Omitir imagen fallida
                     }
@@ -164,8 +165,9 @@ export default function NewVehiclePage() {
             setSuccess(true);
             setTimeout(() => router.push('/admin/vehicles'), 1500);
 
-        } catch (err: any) {
-            setError(err.message || 'Error inesperado al guardar el vehículo');
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : 'Error inesperado al guardar el vehículo';
+            setError(message);
             console.error('Submit Error:', err);
         } finally {
             setLoading(false);
@@ -288,7 +290,11 @@ export default function NewVehiclePage() {
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                 {images.map((img, i) => (
                                     <div key={i} className="relative aspect-square group">
-                                        <img src={img.preview} className="w-full h-full object-cover rounded-xl border border-white/10" />
+                                        <img
+                                            src={img.preview}
+                                            alt={`Imagen ${index + 1}`}
+                                            className="w-full h-full object-cover rounded-xl border border-white/10"
+                                        />
                                         <button
                                             type="button"
                                             onClick={() => removeImage(i)}

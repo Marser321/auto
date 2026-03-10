@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { FileText, Download, Filter, Search, DollarSign, ArrowLeft, Loader2, MoreVertical, CreditCard, CheckCircle2, Clock, AlertCircle, Trash2, X } from 'lucide-react';
+import { FileText, Download, DollarSign, ArrowLeft, Loader2, CheckCircle2, Clock, Trash2, X } from 'lucide-react';
 import Link from 'next/link';
 import { insforge } from '@/lib/insforge';
 
@@ -83,7 +83,7 @@ export default function InvoicesAdminPage() {
             setShowModal(false);
             setFormData({ customer_id: '', total: 0, moneda: 'USD', estado_pago: 'pendiente' });
             loadInvoices();
-        } catch (err) {
+        } catch {
             alert('Error al crear factura');
         } finally {
             setSaving(false);
@@ -96,7 +96,7 @@ export default function InvoicesAdminPage() {
             const { error } = await insforge.database.from('invoices').delete().eq('id', id);
             if (error) throw error;
             loadInvoices();
-        } catch (err) {
+        } catch {
             alert('Error al eliminar');
         }
     };

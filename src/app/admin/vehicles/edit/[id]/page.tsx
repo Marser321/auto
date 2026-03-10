@@ -1,8 +1,9 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { ArrowLeft, Save, Upload, X, Plus, Info, CheckCircle2, AlertCircle, Loader2, Camera } from 'lucide-react';
+import { ArrowLeft, Save, X, Plus, Info, CheckCircle2, AlertCircle, Loader2, Camera } from 'lucide-react';
 import Link from 'next/link';
 import { insforge } from '@/lib/insforge';
 
@@ -34,11 +35,7 @@ export default function EditVehiclePage() {
     const [newFeature, setNewFeature] = useState({ titulo: '', descripcion: '' });
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
-        if (id) loadVehicleData();
-    }, [id]);
-
-    async function loadVehicleData() {
+    const loadVehicleData = useCallback(async () => {
         setLoading(true);
         try {
             // 1. Cargar info básica
@@ -72,13 +69,19 @@ export default function EditVehiclePage() {
                 setFeatures(vFeatures.map(f => ({ id: f.id, titulo: f.titulo, descripcion: f.descripcion })));
             }
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             setError('Error al cargar datos del vehículo');
             console.error(err);
         } finally {
             setLoading(false);
         }
-    }
+    }, [id]);
+
+    useEffect(() => {
+        if (id) {
+            void loadVehicleData();
+        }
+    }, [id, loadVehicleData]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -184,8 +187,9 @@ export default function EditVehiclePage() {
             setSuccess(true);
             setTimeout(() => router.push('/admin/vehicles'), 1500);
 
-        } catch (err: any) {
-            setError(err.message || 'Error al actualizar el vehículo');
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : 'Error al actualizar el vehículo';
+            setError(message);
             console.error(err);
         } finally {
             setSaving(false);
@@ -297,7 +301,11 @@ export default function EditVehiclePage() {
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                 {images.map((img, i) => (
                                     <div key={i} className="relative aspect-square group">
-                                        <img src={img.preview} className="w-full h-full object-cover rounded-xl border border-white/10" />
+                                        <img
+                                            src={img.preview}
+                                            alt={`Imagen ${index + 1}`}
+                                            className="w-full h-full object-cover rounded-xl border border-white/10"
+                                        />
                                         <button
                                             type="button"
                                             onClick={() => removeImage(i)}

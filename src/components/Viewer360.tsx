@@ -282,10 +282,13 @@ export default function Viewer360({ imagen, hotspots, hotspotActivo, onHotspotCl
             return;
         }
 
-        // Si es un dispositivo que soporta Device Orientation Event y necesita Permisos
-        if (typeof DeviceOrientationEvent !== 'undefined' && typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+        // Si es un dispositivo que soporta Device Orientation Event y necesita permisos
+        if (typeof DeviceOrientationEvent !== 'undefined') {
+            const requestPermission = (DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<PermissionState> }).requestPermission;
+
+            if (typeof requestPermission === 'function') {
             try {
-                const permissionState = await (DeviceOrientationEvent as any).requestPermission();
+                const permissionState = await requestPermission();
                 if (permissionState === 'granted') {
                     setAutoRotar(false);
                     setArEnabled(true);
@@ -295,11 +298,13 @@ export default function Viewer360({ imagen, hotspots, hotspotActivo, onHotspotCl
             } catch (err) {
                 console.error(err);
             }
-        } else {
-            // Android o navegadores no restrictivos
-            setAutoRotar(false);
-            setArEnabled(true);
+                return;
+            }
         }
+
+        // Android o navegadores no restrictivos
+        setAutoRotar(false);
+        setArEnabled(true);
     }, [arEnabled]);
 
     if (!montado) return null;

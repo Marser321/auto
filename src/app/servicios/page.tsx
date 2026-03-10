@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
 import { Camera, Eye, Film, CheckCircle2, ArrowRight, Play, Zap, Shield, Sparkles } from 'lucide-react';
 import Link from 'next/link';

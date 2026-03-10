@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Search, Filter, MoreVertical, Edit2, Trash2, ExternalLink, Car } from 'lucide-react';
+import { Plus, Search, Filter, Edit2, Trash2, ExternalLink, Car } from 'lucide-react';
 import Link from 'next/link';
 import { insforge } from '@/lib/insforge';
 

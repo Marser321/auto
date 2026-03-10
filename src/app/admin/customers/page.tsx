@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Plus, Search, User, Phone, Mail, FileText, MoreVertical, Edit2, Trash2, ArrowLeft, Loader2 } from 'lucide-react';
+import { useState, useEffect, type SVGProps } from 'react';
+import { Plus, Search, User, Phone, Mail, Edit2, Trash2, ArrowLeft, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { insforge } from '@/lib/insforge';
 
@@ -12,6 +12,7 @@ interface Customer {
     email: string;
     telefono: string;
     documento: string;
+    direccion?: string;
     created_at: string;
 }
 
@@ -61,7 +62,7 @@ export default function CustomersAdminPage() {
             email: customer.email,
             telefono: customer.telefono,
             documento: customer.documento,
-            direccion: (customer as any).direccion || '',
+            direccion: customer.direccion || '',
         });
         setShowModal(true);
     };
@@ -106,7 +107,8 @@ export default function CustomersAdminPage() {
             const { error } = await insforge.database.from('customers').delete().eq('id', id);
             if (error) throw error;
             loadCustomers();
-        } catch (err) {
+        } catch (error) {
+            console.error(error);
             alert('Error al eliminar cliente (posiblemente tiene órdenes activas)');
         }
     };
@@ -266,7 +268,7 @@ export default function CustomersAdminPage() {
 }
 
 // Icono X que faltaba importar
-function X(props: any) {
+function X(props: SVGProps<SVGSVGElement>) {
     return (
         <svg
             {...props}

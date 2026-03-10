@@ -5,6 +5,31 @@ import { Search, SlidersHorizontal, X, Heart, Clock } from 'lucide-react';
 import VehicleCard from '@/components/VehicleCard';
 import { insforge, isInsforgeConfigured } from '@/lib/insforge';
 
+type VehicleImageRow = { url: string };
+type VehicleRow = {
+    id: string;
+    marca: string;
+    modelo: string;
+    anio: number;
+    precio: number;
+    kilometraje: number;
+    transmision: string;
+    combustible: string;
+    vehicle_images?: VehicleImageRow[] | null;
+};
+
+type VehicleItem = {
+    id: string;
+    imagen_url: string;
+    marca: string;
+    modelo: string;
+    anio: number;
+    precio: number;
+    kilometraje: number;
+    transmision: string;
+    combustible: string;
+};
+
 // Datos demo fallback
 const VEHICULOS_DEMO = [
     { id: 'demo-1', imagen_url: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&q=80', marca: 'Volkswagen', modelo: 'Gol Trend 1.6', anio: 2019, precio: 12500, kilometraje: 65000, transmision: 'Manual', combustible: 'Nafta' },
@@ -22,7 +47,7 @@ const MARCAS = ['Todas', 'Volkswagen', 'Chevrolet', 'Peugeot', 'Toyota', 'Renaul
 const COMBUSTIBLES = ['Todos', 'Nafta', 'Diésel', 'Híbrido'];
 
 export default function CatalogoPage() {
-    const [vehiculos, setVehiculos] = useState(VEHICULOS_DEMO);
+    const [vehiculos, setVehiculos] = useState<VehicleItem[]>(VEHICULOS_DEMO);
     const [busqueda, setBusqueda] = useState('');
     const [marcaFiltro, setMarcaFiltro] = useState('Todas');
     const [combustibleFiltro, setCombustibleFiltro] = useState('Todos');
@@ -33,7 +58,7 @@ export default function CatalogoPage() {
 
     // Historial state
     const [historialIds, setHistorialIds] = useState<string[]>([]);
-    const [vehiculosHistorial, setVehiculosHistorial] = useState<any[]>([]);
+    const [vehiculosHistorial, setVehiculosHistorial] = useState<VehicleItem[]>([]);
 
     useEffect(() => {
         async function cargar() {
@@ -44,18 +69,19 @@ export default function CatalogoPage() {
                     .eq('estado', 'disponible')
                     .order('created_at', { ascending: false });
 
-                if (data && data.length > 0) {
+                const rows = (data ?? []) as VehicleRow[];
+                if (rows.length > 0) {
                     setVehiculos(
-                        data.map((v: Record<string, unknown>) => ({
-                            id: v.id as string,
-                            imagen_url: (v.vehicle_images as Array<{ url: string }>)?.[0]?.url || VEHICULOS_DEMO[0].imagen_url,
-                            marca: v.marca as string,
-                            modelo: v.modelo as string,
-                            anio: v.anio as number,
-                            precio: v.precio as number,
-                            kilometraje: v.kilometraje as number,
-                            transmision: v.transmision as string,
-                            combustible: v.combustible as string,
+                        rows.map((v) => ({
+                            id: v.id,
+                            imagen_url: v.vehicle_images?.[0]?.url || VEHICULOS_DEMO[0].imagen_url,
+                            marca: v.marca,
+                            modelo: v.modelo,
+                            anio: v.anio,
+                            precio: v.precio,
+                            kilometraje: v.kilometraje,
+                            transmision: v.transmision,
+                            combustible: v.combustible,
                         }))
                     );
                 }
@@ -100,7 +126,9 @@ export default function CatalogoPage() {
         }
         const combi = [...vehiculos, ...VEHICULOS_DEMO];
         // Filtramos para asegurar que esten primero en el array
-        const vistosObject = historialIds.map(id => combi.find(v => v.id === id)).filter(Boolean);
+        const vistosObject = historialIds
+            .map((id) => combi.find((v) => v.id === id))
+            .filter((v): v is VehicleItem => Boolean(v));
         setVehiculosHistorial(vistosObject);
     }, [historialIds, vehiculos]);
 
@@ -266,7 +294,7 @@ export default function CatalogoPage() {
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                        {vehiculosHistorial.map((vehiculo: any) => (
+                        {vehiculosHistorial.map((vehiculo) => (
                             <div key={`hist-${vehiculo.id}`} className="transform scale-[0.85] -m-4 origin-top">
                                 <VehicleCard {...vehiculo} />
                             </div>

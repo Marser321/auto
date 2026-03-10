@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Eye, RefreshCcw, Shield, ChevronRight, Building2, Zap, LayoutDashboard } from 'lucide-react';
+import { ArrowRight, Eye, ChevronRight, Zap, LayoutDashboard } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import VehicleCard from '@/components/VehicleCard';
@@ -63,13 +63,24 @@ const SERVICIOS = [
   },
 ];
 
+type VehicleImageRow = { url: string };
+type VehicleRow = {
+  id: string;
+  marca: string;
+  modelo: string;
+  anio: number;
+  precio: number;
+  kilometraje: number;
+  transmision: string;
+  combustible: string;
+  vehicle_images?: VehicleImageRow[] | null;
+};
+
 export default function HomePage() {
   const [vehiculos, setVehiculos] = useState(VEHICULOS_DEMO);
-  const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
     if (!isInsforgeConfigured) {
-      setCargando(false);
       return;
     }
 
@@ -82,8 +93,9 @@ export default function HomePage() {
           .order('created_at', { ascending: false })
           .limit(6);
 
-        if (data && data.length > 0) {
-          setVehiculos(data.map((v: any) => ({
+        const rows = (data ?? []) as VehicleRow[];
+        if (rows.length > 0) {
+          setVehiculos(rows.map((v) => ({
             id: v.id,
             imagen_url: v.vehicle_images?.[0]?.url || VEHICULOS_DEMO[0].imagen_url,
             marca: v.marca,
@@ -97,8 +109,6 @@ export default function HomePage() {
         }
       } catch (error) {
         console.error('Error cargando destacados:', error);
-      } finally {
-        setCargando(false);
       }
     }
     cargar();
