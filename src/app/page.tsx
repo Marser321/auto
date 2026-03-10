@@ -19,10 +19,11 @@ type VehicleCardItem = {
   kilometraje: number;
   transmision: string;
   combustible: string;
+  badges?: string[];
 };
 
 // Datos de ejemplo mientras no haya datos en DB
-const VEHICULOS_DEMO: VehicleCardItem[] = DEMO_VEHICLES.slice(0, 3).map((v) => ({
+const VEHICULOS_DEMO: VehicleCardItem[] = DEMO_VEHICLES.slice(0, 6).map((v) => ({
   id: v.id,
   imagen_url: v.imagen_url,
   marca: v.marca,
@@ -32,24 +33,41 @@ const VEHICULOS_DEMO: VehicleCardItem[] = DEMO_VEHICLES.slice(0, 3).map((v) => (
   kilometraje: v.kilometraje,
   transmision: v.transmision,
   combustible: v.combustible,
+  badges: v.badges,
 }));
 
 const SERVICIOS = [
   {
     icono: Eye,
     titulo: 'Visores 360° Interactivos',
-    descripcion: 'Generá mayor confianza en tus clientes permitiéndoles explorar cada detalle del interior con tecnología inmersiva.',
+    descripcion: 'Aumenta la confianza mostrando cada detalle del interior con tecnologia inmersiva 360°.',
   },
   {
     icono: Zap,
     titulo: 'Gestión Automatizada',
-    descripcion: 'Integración fluida con n8n y CRMs para automatizar la captura de leads, tasaciones de permutas y agendamiento.',
+    descripcion: 'Integracion con CRMs y n8n para automatizar leads, tasaciones y agendamiento.',
   },
   {
     icono: LayoutDashboard,
     titulo: 'Panel Multi-Sucursal',
-    descripcion: 'Administrá el inventario de múltiples agencias desde un único dashboard centralizado y escalable en la nube.',
+    descripcion: 'Inventario unificado para multiples sucursales con control centralizado y escalable.',
   },
+];
+
+const TRUSTED_LOGOS = [
+  'AutoHub Group',
+  'Nova Motors',
+  'Distrito Cars',
+  'Premium Fleet',
+  'Capital Autos',
+  'Northline Motor',
+];
+
+const SCALE_METRICS = [
+  { label: 'Sucursales conectadas', value: '18+' },
+  { label: 'Leads procesados / mes', value: '12.4k' },
+  { label: 'Tiempo medio de venta', value: '-38%' },
+  { label: 'Inventario activo', value: '3.2k' },
 ];
 
 type VehicleImageRow = { url: string };
@@ -179,6 +197,48 @@ export default function HomePage() {
             {vehiculos.map((vehiculo) => (
               <VehicleCard key={vehiculo.id} {...vehiculo} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Escala y confianza */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-surface">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">Plataforma para crecer</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Diseñada para automotoras que venden volumen
+            </h2>
+            <p className="text-muted text-base leading-relaxed mb-6">
+              Procesa inventario grande, coordina multiples sucursales y convierte leads con flujos claros.
+              Todo con una experiencia visual premium que eleva el valor percibido del stock.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              {SCALE_METRICS.map((metric) => (
+                <div key={metric.label} className="p-4 bg-surface-secondary rounded-xl border border-white/5">
+                  <p className="text-2xl font-black text-white">{metric.value}</p>
+                  <p className="text-xs text-muted mt-1">{metric.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="bg-surface-secondary border border-white/5 rounded-3xl p-8">
+            <p className="text-xs font-semibold text-muted uppercase tracking-widest mb-4">Trusted by</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {TRUSTED_LOGOS.map((logo) => (
+                <div key={logo} className="px-3 py-2 rounded-xl bg-white/5 text-center text-xs font-semibold text-white/70">
+                  {logo}
+                </div>
+              ))}
+            </div>
+            <div className="mt-8">
+              <Button size="lg" asChild>
+                <Link href="/contacto">
+                  Pedir demo enterprise
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

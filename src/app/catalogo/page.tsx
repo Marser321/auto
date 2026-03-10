@@ -29,6 +29,7 @@ type VehicleItem = {
     kilometraje: number;
     transmision: string;
     combustible: string;
+    badges?: string[];
 };
 
 // Datos demo fallback
@@ -42,6 +43,7 @@ const VEHICULOS_DEMO: VehicleItem[] = DEMO_VEHICLES.map((v) => ({
     kilometraje: v.kilometraje,
     transmision: v.transmision,
     combustible: v.combustible,
+    badges: v.badges,
 }));
 
 const MARCAS = ['Todas', ...Array.from(new Set(VEHICULOS_DEMO.map((v) => v.marca)))];

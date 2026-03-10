@@ -9,9 +9,9 @@ const SERVICIOS_PREMIUM = [
         id: 'fotos',
         icono: Camera,
         titulo: 'Fotografía Profesional',
-        subtitulo: 'Sesiones de estudio y exteriores',
-        descripcion: 'Capturamos cada ángulo de tu vehículo con iluminación controlada y edición de nivel publicitario. Resaltamos los detalles que venden.',
-        puntos: ['Resolución 4K', 'Edición avanzada (Color Grading)', 'Remoción de patentes y reflejos', 'Entrega en 24hs'],
+        subtitulo: 'Imagenes que elevan el ticket',
+        descripcion: 'Contenido visual premium para aumentar la conversion y el valor percibido del stock.',
+        puntos: ['Produccion consistente', 'Edicion profesional', 'Look & feel de marca', 'Entrega en 24/48hs'],
         imagen: '/demo/services/showroom.jpg',
         color: 'text-blue-400',
         bg: 'bg-blue-500/10'
@@ -20,9 +20,9 @@ const SERVICIOS_PREMIUM = [
         id: '360',
         icono: Eye,
         titulo: 'Tour Interior 360°',
-        subtitulo: 'Experiencia inmersiva interactiva',
-        descripcion: 'Permití que tus clientes se suban al auto desde su celular. Un visor interactivo que elimina dudas y aumenta el deseo de compra.',
-        puntos: ['Integración nativa WebGL', 'Hotspots de equipamiento', 'Compatible con VR', 'Visualización fluida'],
+        subtitulo: 'Confianza y transparencia',
+        descripcion: 'Reduci friccion en la compra con un tour inmersivo que muestra equipamiento y estado real.',
+        puntos: ['WebGL nativo', 'Hotspots de equipamiento', 'Experiencia mobile-first', 'Acelera decisiones'],
         imagen: '/demo/services/interior.jpg',
         color: 'text-accent',
         bg: 'bg-accent/10'
@@ -31,9 +31,9 @@ const SERVICIOS_PREMIUM = [
         id: 'reels',
         icono: Film,
         titulo: 'Video Reels & Short-form',
-        subtitulo: 'Viralidad para Instagram y TikTok',
-        descripcion: 'Creamos videos dinámicos con música tendencia y transiciones impactantes. La mejor forma de conseguir interesados frescos via redes sociales.',
-        puntos: ['Formato 9:16 vertical', 'Música licenciada', 'Edición de ritmo rápido', 'Optimizado para algoritmos'],
+        subtitulo: 'Traccion en redes y anuncios',
+        descripcion: 'Reels y piezas cortas para captar leads con performance y coherencia de marca.',
+        puntos: ['Formato 9:16', 'Guiones de conversion', 'Edicion dinamica', 'Optimizado para ads'],
         imagen: '/demo/services/workshop.jpg',
         color: 'text-purple-400',
         bg: 'bg-purple-500/10'
@@ -59,8 +59,8 @@ export default function ServiciosPage() {
                     </h1>
 
                     <p className="text-lg sm:text-xl text-muted max-w-3xl mx-auto mb-12 animate-slide-up animation-delay-100">
-                        No solo sacamos fotos; creamos contenido que detiene el scroll y acelera la venta.
-                        Tecnología 360°, video cinemático y fotografía de alta gama.
+                        No solo fotos: construimos un sistema de contenido que acelera ventas y sostiene escala.
+                        360°, video y fotografia premium para automotoras con volumen.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up animation-delay-200">

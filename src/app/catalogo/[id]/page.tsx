@@ -31,6 +31,10 @@ interface Vehiculo {
     descripcion: string;
     estado: string;
     imagen_360_url?: string;
+    badges?: string[];
+    highlights?: string[];
+    inspeccion?: { puntos: number; resumen: string };
+    historial?: { titulo: string; detalle: string }[];
 }
 
 interface Imagen {
@@ -183,6 +187,8 @@ export default function VDPPage() {
         { icono: Palette, label: 'Color', valor: vehiculo.color },
         { icono: Hash, label: 'VIN', valor: vehiculo.vin },
     ];
+
+    const badges = vehiculo.badges?.length ? vehiculo.badges : (tiene360 ? ['360'] : []);
 
     // JSON-LD
     const jsonLd = {
@@ -355,6 +361,11 @@ export default function VDPPage() {
                                     </div>
                                 </button>
                             )}
+                            {tiene360 && (
+                                <p className="mt-3 text-xs text-muted leading-relaxed">
+                                    El tour 360 reduce dudas, mejora la confianza y acelera decisiones de compra.
+                                </p>
+                            )}
                         </div>
 
                         {/* Info del vehículo */}
@@ -364,6 +375,15 @@ export default function VDPPage() {
                                     <p className="text-sm text-accent font-semibold uppercase tracking-wider">{vehiculo.marca}</p>
                                     <h1 className="text-3xl sm:text-4xl font-black text-white mt-1">{vehiculo.modelo}</h1>
                                     <p className="text-4xl font-black text-accent mt-3">{formatearPrecio(vehiculo.precio)}</p>
+                                    {badges.length > 0 && (
+                                        <div className="mt-3 flex flex-wrap gap-2">
+                                            {badges.map((badge) => (
+                                                <span key={badge} className="px-3 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-full bg-white/5 text-white border border-white/10">
+                                                    {badge}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Specs grid */}
@@ -384,6 +404,44 @@ export default function VDPPage() {
                                     <h3 className="text-sm font-semibold text-white mb-2">Descripción</h3>
                                     <p className="text-sm text-muted leading-relaxed">{vehiculo.descripcion}</p>
                                 </div>
+
+                                {vehiculo.highlights && vehiculo.highlights.length > 0 && (
+                                    <div className="p-4 bg-surface-secondary rounded-xl border border-white/5">
+                                        <h3 className="text-sm font-semibold text-white mb-2">Lo mejor de este auto</h3>
+                                        <ul className="grid grid-cols-1 gap-2">
+                                            {vehiculo.highlights.map((item) => (
+                                                <li key={item} className="text-sm text-muted flex items-center gap-2">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                                                    <span>{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {vehiculo.inspeccion && (
+                                    <div className="p-4 bg-surface-secondary rounded-xl border border-white/5">
+                                        <h3 className="text-sm font-semibold text-white mb-2">Garantia e inspeccion</h3>
+                                        <p className="text-sm text-muted leading-relaxed">{vehiculo.inspeccion.resumen}</p>
+                                        <p className="text-xs text-white/70 mt-2">
+                                            {vehiculo.inspeccion.puntos} puntos verificados
+                                        </p>
+                                    </div>
+                                )}
+
+                                {vehiculo.historial && vehiculo.historial.length > 0 && (
+                                    <div className="p-4 bg-surface-secondary rounded-xl border border-white/5">
+                                        <h3 className="text-sm font-semibold text-white mb-2">Historial y transparencia</h3>
+                                        <div className="space-y-3">
+                                            {vehiculo.historial.map((item) => (
+                                                <div key={item.titulo}>
+                                                    <p className="text-sm font-semibold text-white">{item.titulo}</p>
+                                                    <p className="text-xs text-muted">{item.detalle}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
 
                                 {/* Simulador de Financiación */}
                                 <div className="p-5 bg-surface-secondary rounded-xl border border-white/5 relative overflow-hidden">

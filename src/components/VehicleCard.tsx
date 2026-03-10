@@ -16,6 +16,7 @@ interface VehicleCardProps {
     kilometraje: number;
     transmision: string;
     combustible: string;
+    badges?: string[];
 }
 
 function formatearPrecio(precio: number): string {
@@ -42,6 +43,7 @@ export default function VehicleCard({
     kilometraje,
     transmision,
     combustible,
+    badges,
 }: VehicleCardProps) {
     const [esFavorito, setEsFavorito] = useState(false);
     const [enComparador, setEnComparador] = useState(false);
@@ -124,6 +126,15 @@ export default function VehicleCard({
                 </div>
                 {/* Imagen */}
                 <div className="relative aspect-[16/10] overflow-hidden">
+                    {badges && badges.length > 0 && (
+                        <div className="absolute top-3 left-3 z-10 flex flex-wrap gap-2">
+                            {badges.slice(0, 3).map((badge) => (
+                                <span key={badge} className="px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-full bg-black/50 text-white border border-white/10">
+                                    {badge}
+                                </span>
+                            ))}
+                        </div>
+                    )}
                     <img
                         src={imagen_url}
                         alt={`${anio} ${marca} ${modelo}`}
