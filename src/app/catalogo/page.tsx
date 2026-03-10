@@ -149,7 +149,7 @@ export default function CatalogoPage() {
     return (
         <div className="min-h-screen">
             {/* Header */}
-            <div className="bg-surface border-b border-white/5">
+            <div className="surface-glass glass-dirty glass-highlight border-b border-white/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <h1 className="text-3xl sm:text-4xl font-bold text-white">
                         Nuestro <span className="text-accent">Catálogo</span>
@@ -167,7 +167,7 @@ export default function CatalogoPage() {
                                 placeholder="Buscar por marca, modelo o año..."
                                 value={busqueda}
                                 onChange={(e) => setBusqueda(e.target.value)}
-                                className="w-full pl-12 pr-4 py-3 bg-surface-secondary border border-white/10 rounded-xl text-white placeholder-muted focus:outline-none focus:border-accent/50 transition-colors"
+                                className="w-full pl-12 pr-4 py-3 bg-black/35 backdrop-blur border border-white/10 rounded-xl text-white placeholder-muted focus:outline-none focus:border-accent/50 transition-colors"
                             />
                             {busqueda && (
                                 <button
@@ -182,7 +182,7 @@ export default function CatalogoPage() {
                             onClick={() => setMostrarFiltros(!mostrarFiltros)}
                             className={`px-4 py-3 rounded-xl border transition-colors flex items-center gap-2 ${mostrarFiltros
                                 ? 'bg-accent border-accent text-white'
-                                : 'bg-surface-secondary border-white/10 text-muted hover:text-white'
+                                : 'bg-black/35 border-white/10 text-muted hover:text-white backdrop-blur'
                                 }`}
                         >
                             <SlidersHorizontal className="w-5 h-5" />
@@ -200,7 +200,7 @@ export default function CatalogoPage() {
                             }}
                             className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium transition-all ${soloFavoritos
                                 ? 'bg-accent/20 border-accent text-accent'
-                                : 'bg-surface-secondary border-white/10 text-muted hover:text-white'
+                                : 'bg-black/35 border-white/10 text-muted hover:text-white backdrop-blur'
                                 }`}
                         >
                             <Heart className={`w-4 h-4 transition-transform ${soloFavoritos ? 'fill-accent scale-110' : ''}`} />
@@ -210,14 +210,14 @@ export default function CatalogoPage() {
 
                     {/* Panel de filtros */}
                     {mostrarFiltros && (
-                        <div className="mt-4 p-4 bg-surface-secondary rounded-xl border border-white/10 animate-fade-in">
+                        <div className="mt-4 p-4 glass-card glass-dirty glass-highlight rounded-xl animate-fade-in">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium text-muted mb-2">Marca</label>
                                     <select
                                         value={marcaFiltro}
                                         onChange={(e) => setMarcaFiltro(e.target.value)}
-                                        className="w-full px-4 py-2.5 bg-surface-tertiary border border-white/10 rounded-lg text-white focus:outline-none focus:border-accent/50"
+                                        className="w-full px-4 py-2.5 bg-black/30 border border-white/10 rounded-lg text-white focus:outline-none focus:border-accent/50"
                                     >
                                         {MARCAS.map((marca) => (
                                             <option key={marca} value={marca}>{marca}</option>
@@ -229,7 +229,7 @@ export default function CatalogoPage() {
                                     <select
                                         value={combustibleFiltro}
                                         onChange={(e) => setCombustibleFiltro(e.target.value)}
-                                        className="w-full px-4 py-2.5 bg-surface-tertiary border border-white/10 rounded-lg text-white focus:outline-none focus:border-accent/50"
+                                        className="w-full px-4 py-2.5 bg-black/30 border border-white/10 rounded-lg text-white focus:outline-none focus:border-accent/50"
                                     >
                                         {COMBUSTIBLES.map((c) => (
                                             <option key={c} value={c}>{c}</option>

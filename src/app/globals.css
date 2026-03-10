@@ -49,16 +49,90 @@
   }
 
   .glass-card {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.35)] relative overflow-hidden;
   }
 
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-accent;
+  }
+
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+  }
+
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-xl border border-white/15 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.45)] relative overflow-hidden;
+  }
+
+  .surface-glass {
+    background-color: rgba(2, 6, 23, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-dirty {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .glass-dirty::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/demo/textures/noise.png");
+    opacity: 0.18;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+
+  .glass-highlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.18), transparent 55%);
+    opacity: 0.6;
+    pointer-events: none;
   }
 }
 
 @layer utilities {
   .perspective-1000 {
     perspective: 1000px;
+  }
+
+  .animate-slow-zoom {
+    animation: slowZoom 36s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: floatSlow 18s ease-in-out infinite;
+  }
+
+  .animate-float-slower {
+    animation: floatSlow 26s ease-in-out infinite;
+  }
+}
+
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-16px);
   }
 }

@@ -125,50 +125,52 @@ export default function HomePage() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-black via-surface to-black" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--background)] to-transparent" />
+        {/* Ambient blobs */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-accent/15 rounded-full blur-[160px] animate-float-slow" />
+          <div className="absolute bottom-[-30%] right-[-10%] w-[600px] h-[600px] bg-white/10 rounded-full blur-[160px] animate-float-slower" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="z-10"
+            className="z-10 flex justify-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-8 backdrop-blur-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-              </span>
-              Nuevos ingresos disponibles
-            </div>
+            <div className="glass-panel glass-dirty glass-highlight px-8 py-10 md:px-12 md:py-12 max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-8 backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                </span>
+                Nuevos ingresos disponibles
+              </div>
 
-            <h1 className="text-4xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
-              Tu próximo auto <br />
-              <span className="text-accent">te espera acá</span>
-            </h1>
+              <h1 className="text-4xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
+                Tu próximo auto <br />
+                <span className="text-accent">te espera acá</span>
+              </h1>
 
-            <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
-              Explorá nuestro catálogo con visualización 360° interactiva,
-              tasá tu auto actual y llevate el que siempre quisiste.
-            </p>
+              <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
+                Explorá nuestro catálogo con visualización 360° interactiva,
+                tasá tu auto actual y llevate el que siempre quisiste.
+              </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <Link href="/catalogo">
-                  Ver Catálogo
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="secondary" asChild>
-                <Link href="/permutas">
-                  Tasá Tu Auto
-                  <ChevronRight className="ml-2 w-5 h-5" />
-                </Link>
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" asChild>
+                  <Link href="/catalogo">
+                    Ver Catálogo
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="secondary" asChild>
+                  <Link href="/permutas">
+                    Tasá Tu Auto
+                    <ChevronRight className="ml-2 w-5 h-5" />
+                  </Link>
+                </Button>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -202,7 +204,7 @@ export default function HomePage() {
       </section>
 
       {/* Escala y confianza */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-surface">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 surface-glass glass-dirty glass-highlight">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div>
             <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">Plataforma para crecer</p>
@@ -215,14 +217,14 @@ export default function HomePage() {
             </p>
             <div className="grid grid-cols-2 gap-4">
               {SCALE_METRICS.map((metric) => (
-                <div key={metric.label} className="p-4 bg-surface-secondary rounded-xl border border-white/5">
+                <div key={metric.label} className="p-4 glass-card glass-dirty glass-highlight rounded-xl">
                   <p className="text-2xl font-black text-white">{metric.value}</p>
                   <p className="text-xs text-muted mt-1">{metric.label}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-surface-secondary border border-white/5 rounded-3xl p-8">
+          <div className="glass-panel glass-dirty glass-highlight p-8">
             <p className="text-xs font-semibold text-muted uppercase tracking-widest mb-4">Trusted by</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {TRUSTED_LOGOS.map((logo) => (
@@ -244,7 +246,7 @@ export default function HomePage() {
       </section>
 
       {/* Servicios */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 surface-glass glass-dirty glass-highlight">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white">
@@ -254,7 +256,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {SERVICIOS.map((servicio) => (
-              <div key={servicio.titulo} className="p-6 bg-surface-secondary rounded-2xl border border-white/5 hover:border-accent/30 transition-all">
+              <div key={servicio.titulo} className="p-6 glass-card glass-dirty glass-highlight hover:border-accent/30 transition-all">
                 <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
                   <servicio.icono className="w-6 h-6 text-accent" />
                 </div>

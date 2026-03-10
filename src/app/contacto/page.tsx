@@ -78,7 +78,7 @@ export default function ContactoPage() {
 
     return (
         <div className="min-h-screen">
-            <div className="bg-surface border-b border-white/5">
+            <div className="surface-glass glass-dirty glass-highlight border-b border-white/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <h1 className="text-3xl sm:text-4xl font-bold text-white">
                         <span className="text-accent">Contactanos</span>
@@ -91,7 +91,7 @@ export default function ContactoPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Formulario */}
                     <div className="lg:col-span-2">
-                        <form onSubmit={handleSubmit} className="bg-surface-secondary rounded-2xl border border-white/5 p-6 sm:p-8 space-y-5">
+                        <form onSubmit={handleSubmit} className="glass-card glass-dirty glass-highlight rounded-2xl p-6 sm:p-8 space-y-5">
                             {error && (
                                 <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-sm text-red-300">{error}</div>
                             )}
@@ -99,12 +99,12 @@ export default function ContactoPage() {
                                 <div>
                                     <label className="block text-sm font-medium text-muted mb-2">Nombre *</label>
                                     <input name="nombre" value={form.nombre} onChange={handleChange} placeholder="Tu nombre"
-                                        className="w-full px-4 py-3 bg-surface-tertiary border border-white/10 rounded-xl text-white placeholder-muted/50 focus:outline-none focus:border-accent/50 transition-colors" />
+                                        className="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-xl text-white placeholder-muted/50 focus:outline-none focus:border-accent/50 transition-colors" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-muted mb-2">Email *</label>
                                     <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="tu@email.com"
-                                        className="w-full px-4 py-3 bg-surface-tertiary border border-white/10 rounded-xl text-white placeholder-muted/50 focus:outline-none focus:border-accent/50 transition-colors" />
+                                        className="w-full px-4 py-3 bg-black/30 border border-white/10 rounded-xl text-white placeholder-muted/50 focus:outline-none focus:border-accent/50 transition-colors" />
                                 </div>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

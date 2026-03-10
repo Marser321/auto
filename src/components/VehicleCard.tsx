@@ -98,7 +98,7 @@ export default function VehicleCard({
 
     return (
         <Link href={`/catalogo/${id}`} className="group block h-full">
-            <article className="bg-surface-secondary rounded-2xl overflow-hidden border border-white/5 hover:border-accent/30 transition-all duration-300 hover-lift h-full flex flex-col relative">
+            <article className="glass-card glass-dirty glass-highlight overflow-hidden hover:border-accent/30 transition-all duration-300 hover-lift h-full flex flex-col relative">
                 {/* Botón Acciones Absolutas */}
                 <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
                     <Button

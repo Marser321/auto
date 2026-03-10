@@ -148,8 +148,8 @@ export default function ComparadorPage() {
     }
 
     return (
-        <div className="min-h-screen bg-surface px-4 py-8 sm:py-12 lg:px-8">
-            <div className="max-w-7xl mx-auto">
+        <div className="min-h-screen px-4 py-8 sm:py-12 lg:px-8">
+            <div className="max-w-7xl mx-auto surface-glass glass-dirty glass-highlight rounded-3xl p-6 sm:p-8 relative overflow-hidden">
                 {/* Header */}
                 <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
@@ -163,7 +163,7 @@ export default function ComparadorPage() {
                         </h1>
                     </div>
                     {vehiculos.length < 3 && (
-                        <Link href="/catalogo" className="px-5 py-2.5 bg-surface-secondary border border-white/10 hover:border-white/20 text-white text-sm font-semibold rounded-xl transition-all">
+                        <Link href="/catalogo" className="px-5 py-2.5 bg-black/40 border border-white/10 hover:border-white/20 text-white text-sm font-semibold rounded-xl transition-all backdrop-blur">
                             + Añadir otro vehículo ({3 - vehiculos.length} lugares disp.)
                         </Link>
                     )}
@@ -187,7 +187,7 @@ export default function ComparadorPage() {
 
                         {/* Columnas Dinámicas para cada auto en Comparación */}
                         {vehiculos.map((v) => (
-                            <div key={v.id} className="col-span-1 bg-surface-secondary border border-white/5 rounded-2xl p-4 flex flex-col animate-fade-in relative hover:border-white/10 transition-colors group">
+                            <div key={v.id} className="col-span-1 glass-card glass-dirty glass-highlight p-4 flex flex-col animate-fade-in relative hover:border-white/10 transition-colors group">
                                 <button
                                     onClick={() => quitarVehiculo(v.id)}
                                     className="absolute -top-3 -right-3 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-xl z-20"
@@ -211,11 +211,11 @@ export default function ComparadorPage() {
                                 </Link>
 
                                 <div className="space-y-4 flex-1">
-                                    <div className="h-16 flex items-center px-4 font-black text-xl text-accent bg-surface-tertiary rounded-xl">{formatearPrecio(v.precio)}</div>
-                                    <div className="h-16 flex items-center gap-2 px-4 font-medium text-white bg-surface-tertiary rounded-xl"><Calendar className="w-4 h-4 text-muted" />{v.anio}</div>
-                                    <div className="h-16 flex items-center gap-2 px-4 font-medium text-white bg-surface-tertiary rounded-xl"><Gauge className="w-4 h-4 text-muted" />{formatearKm(v.kilometraje)}</div>
-                                    <div className="h-16 flex items-center gap-2 px-4 font-medium text-white bg-surface-tertiary rounded-xl"><Fuel className="w-4 h-4 text-muted" />{v.combustible}</div>
-                                    <div className="h-16 flex items-center gap-2 px-4 font-medium text-white bg-surface-tertiary rounded-xl"><Settings2 className="w-4 h-4 text-muted" />{v.transmision}</div>
+                                    <div className="h-16 flex items-center px-4 font-black text-xl text-accent bg-black/30 rounded-xl border border-white/5">{formatearPrecio(v.precio)}</div>
+                                    <div className="h-16 flex items-center gap-2 px-4 font-medium text-white bg-black/25 rounded-xl border border-white/5"><Calendar className="w-4 h-4 text-muted" />{v.anio}</div>
+                                    <div className="h-16 flex items-center gap-2 px-4 font-medium text-white bg-black/25 rounded-xl border border-white/5"><Gauge className="w-4 h-4 text-muted" />{formatearKm(v.kilometraje)}</div>
+                                    <div className="h-16 flex items-center gap-2 px-4 font-medium text-white bg-black/25 rounded-xl border border-white/5"><Fuel className="w-4 h-4 text-muted" />{v.combustible}</div>
+                                    <div className="h-16 flex items-center gap-2 px-4 font-medium text-white bg-black/25 rounded-xl border border-white/5"><Settings2 className="w-4 h-4 text-muted" />{v.transmision}</div>
                                 </div>
 
                                 <Link
