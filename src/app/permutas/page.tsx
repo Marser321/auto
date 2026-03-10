@@ -6,7 +6,7 @@ import {
     Upload, X, Loader2, AlertCircle, PartyPopper
 } from 'lucide-react';
 import { validarFormatoVINBasico } from '@/lib/vin-validator';
-import { insforge } from '@/lib/insforge';
+import { insforge, isInsforgeConfigured } from '@/lib/insforge';
 
 const PASOS = [
     { numero: 1, titulo: 'Tus datos', icono: User },
@@ -50,6 +50,7 @@ export default function PermutasPage() {
     const [previews, setPreviews] = useState<string[]>([]);
     const [enviando, setEnviando] = useState(false);
     const [enviado, setEnviado] = useState(false);
+    const [demoMode, setDemoMode] = useState(false);
     const [error, setError] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -113,8 +114,14 @@ export default function PermutasPage() {
     }
 
     async function enviar() {
-        setEnviando(true);
         setError('');
+        if (!isInsforgeConfigured) {
+            setDemoMode(true);
+            setEnviado(true);
+            return;
+        }
+
+        setEnviando(true);
 
         try {
             // Subir fotos a InsForge Storage
@@ -195,6 +202,9 @@ export default function PermutasPage() {
                     <p className="text-muted leading-relaxed">
                         Recibimos tu solicitud de tasación. Nuestro equipo se comunicará con vos en menos de 24 horas con una oferta competitiva.
                     </p>
+                    {demoMode && (
+                        <p className="mt-3 text-xs text-amber-300/80">Modo demo: envío simulado.</p>
+                    )}
                     <a href="/" className="inline-block mt-8 px-8 py-3 bg-accent hover:bg-accent-hover text-white font-semibold rounded-xl transition-colors">
                         Volver al inicio
                     </a>

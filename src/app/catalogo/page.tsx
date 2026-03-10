@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Search, SlidersHorizontal, X, Heart, Clock } from 'lucide-react';
 import VehicleCard from '@/components/VehicleCard';
-import { insforge } from '@/lib/insforge';
+import { insforge, isInsforgeConfigured } from '@/lib/insforge';
 
 // Datos demo fallback
 const VEHICULOS_DEMO = [
@@ -65,7 +65,12 @@ export default function CatalogoPage() {
                 setCargando(false);
             }
         }
-        cargar();
+
+        if (isInsforgeConfigured) {
+            cargar();
+        } else {
+            setCargando(false);
+        }
 
         // Cargar favoritos
         const cargarFavs = () => {

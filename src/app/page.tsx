@@ -6,7 +6,7 @@ import { ArrowRight, Eye, RefreshCcw, Shield, ChevronRight, Building2, Zap, Layo
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import VehicleCard from '@/components/VehicleCard';
-import { insforge } from '@/lib/insforge';
+import { insforge, isInsforgeConfigured } from '@/lib/insforge';
 
 // Datos de ejemplo mientras no haya datos en DB
 const VEHICULOS_DEMO = [
@@ -68,6 +68,11 @@ export default function HomePage() {
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
+    if (!isInsforgeConfigured) {
+      setCargando(false);
+      return;
+    }
+
     async function cargar() {
       try {
         const { data } = await insforge.database

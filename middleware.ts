@@ -2,7 +2,7 @@ import { InsforgeMiddleware } from '@insforge/nextjs/middleware';
 
 export default InsforgeMiddleware({
     baseUrl: process.env.NEXT_PUBLIC_INSFORGE_BASE_URL || 'https://kchej38e.us-east.insforge.app',
-    publicRoutes: ['/', '/catalogo', '/catalogo/(.*)', '/permutas', '/contacto'],
+    publicRoutes: ['/', '/catalogo', '/catalogo/(.*)', '/permutas', '/contacto', '/servicios', '/comparador'],
 });
 
 export const config = {

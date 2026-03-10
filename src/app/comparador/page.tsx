@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Gauge, Settings2, Fuel, Calendar, Scale, X } from 'lucide-react';
-import { insforge } from '@/lib/insforge';
+import { insforge, isInsforgeConfigured } from '@/lib/insforge';
 
 interface VehiculoBase {
     id: string;
@@ -48,6 +48,13 @@ export default function ComparadorPage() {
         }
 
         try {
+            if (!isInsforgeConfigured) {
+                const hidratados = compIds.map((id: string) => DEMO_AUTOS[id]).filter(Boolean);
+                setVehiculos(hidratados);
+                setCargando(false);
+                return;
+            }
+
             // Intentamos cargar de Supabase
             const { data } = await insforge.database
                 .from('vehicle_inventory')

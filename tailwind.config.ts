@@ -13,10 +13,10 @@ export default {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
         accent: {
-          DEFAULT: 'var(--brand-primary)',
-          hover: 'var(--brand-hover)',
-          light: 'var(--brand-light)',
-          foreground: 'var(--brand-foreground)',
+          DEFAULT: 'rgb(var(--brand-primary) / <alpha-value>)',
+          hover: 'rgb(var(--brand-hover) / <alpha-value>)',
+          light: 'rgb(var(--brand-light) / <alpha-value>)',
+          foreground: 'rgb(var(--brand-foreground) / <alpha-value>)',
         },
         surface: {
           DEFAULT: 'var(--surface)',

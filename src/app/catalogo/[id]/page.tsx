@@ -8,7 +8,7 @@ import {
     Fuel, Gauge, Settings2, Calendar, Palette, Hash,
     Phone, MessageCircle, X, AlertTriangle, Star, Info, Gem, Wallet
 } from 'lucide-react';
-import { insforge } from '@/lib/insforge';
+import { insforge, isInsforgeConfigured } from '@/lib/insforge';
 import Viewer360Modal from '@/components/Viewer360Modal';
 import type { Hotspot360 } from '@/components/Viewer360';
 
@@ -145,7 +145,7 @@ export default function VDPPage() {
 
     // Cargar datos reales
     useEffect(() => {
-        if (!id || id.startsWith('demo-')) return;
+        if (!id || id.startsWith('demo-') || !isInsforgeConfigured) return;
 
         async function cargar() {
             try {

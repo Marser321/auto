@@ -1,6 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   :root {
@@ -12,22 +12,23 @@
     --muted: #94a3b8;
 
     /* Tema dinámico */
-    --brand-primary: #DC2626;
+    --brand-primary: 220 38 38;
     /* Rojo por defecto */
-    --brand-hover: #B91C1C;
-    --accent: var(--brand-primary);
+    --brand-hover: 185 28 28;
+    --brand-light: var(--brand-primary);
+    --brand-foreground: 255 255 255;
 
     --radius: 0.75rem;
   }
 
   .theme-gold {
-    --brand-primary: #D4AF37;
-    --brand-hover: #B8860B;
+    --brand-primary: 212 175 55;
+    --brand-hover: 184 134 11;
   }
 
   .theme-blue {
-    --brand-primary: #2563EB;
-    --brand-hover: #1D4ED8;
+    --brand-primary: 37 99 235;
+    --brand-hover: 29 78 216;
   }
 }
 
@@ -37,7 +38,7 @@
   }
 
   body {
-    @apply bg-[var(--background)] text-[var(--foreground)] selection:bg-accent;
+    @apply bg-[var(--background)] text-[var(--foreground)] selection:bg-accent/30;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }

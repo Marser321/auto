@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { Send, Loader2, CheckCircle2, MapPin, Phone, Mail, Clock } from 'lucide-react';
-import { insforge } from '@/lib/insforge';
+import { insforge, isInsforgeConfigured } from '@/lib/insforge';
 
 export default function ContactoPage() {
     const [form, setForm] = useState({ nombre: '', email: '', telefono: '', mensaje: '', vehiculo_interes: '' });
     const [enviando, setEnviando] = useState(false);
     const [enviado, setEnviado] = useState(false);
+    const [demoMode, setDemoMode] = useState(false);
     const [error, setError] = useState('');
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -19,6 +20,12 @@ export default function ContactoPage() {
         e.preventDefault();
         if (!form.nombre || !form.email || !form.mensaje) {
             setError('Completá los campos obligatorios');
+            return;
+        }
+
+        if (!isInsforgeConfigured) {
+            setDemoMode(true);
+            setEnviado(true);
             return;
         }
 
@@ -57,6 +64,9 @@ export default function ContactoPage() {
                     </div>
                     <h1 className="text-2xl font-bold text-white mb-2">¡Mensaje Enviado!</h1>
                     <p className="text-muted">Te responderemos lo antes posible.</p>
+                    {demoMode && (
+                        <p className="mt-3 text-xs text-amber-300/80">Modo demo: envío simulado.</p>
+                    )}
                     <a href="/" className="inline-block mt-6 px-6 py-3 bg-accent hover:bg-accent-hover text-white font-semibold rounded-xl transition-colors">
                         Volver al inicio
                     </a>
