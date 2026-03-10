@@ -125,11 +125,12 @@ export default function HomePage() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* Ambient blobs */}
+        {/* Ambient glows */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-accent/15 rounded-full blur-[160px] animate-float-slow" />
-          <div className="absolute bottom-[-30%] right-[-10%] w-[600px] h-[600px] bg-white/10 rounded-full blur-[160px] animate-float-slower" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
+          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[760px] h-[760px] bg-accent/18 rounded-full blur-[170px] animate-float-slow" />
+          <div className="absolute bottom-[-35%] right-[-8%] w-[620px] h-[620px] bg-white/12 rounded-full blur-[170px] animate-float-slower" />
+          <div className="absolute top-[15%] left-[5%] w-[420px] h-[420px] bg-sky-400/12 rounded-full blur-[160px] animate-float-slow" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
@@ -138,7 +139,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             className="z-10 flex justify-center"
           >
-            <div className="glass-panel glass-dirty glass-highlight px-8 py-10 md:px-12 md:py-12 max-w-3xl">
+            <div className="glass-panel glass-highlight px-8 py-10 md:px-12 md:py-12 max-w-3xl">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium mb-8 backdrop-blur-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
@@ -204,7 +205,7 @@ export default function HomePage() {
       </section>
 
       {/* Escala y confianza */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 surface-glass glass-dirty glass-highlight">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 surface-glass glass-highlight">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div>
             <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">Plataforma para crecer</p>
@@ -217,14 +218,14 @@ export default function HomePage() {
             </p>
             <div className="grid grid-cols-2 gap-4">
               {SCALE_METRICS.map((metric) => (
-                <div key={metric.label} className="p-4 glass-card glass-dirty glass-highlight rounded-xl">
+                <div key={metric.label} className="p-4 glass-card glass-highlight rounded-xl">
                   <p className="text-2xl font-black text-white">{metric.value}</p>
                   <p className="text-xs text-muted mt-1">{metric.label}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="glass-panel glass-dirty glass-highlight p-8">
+          <div className="glass-panel glass-highlight p-8">
             <p className="text-xs font-semibold text-muted uppercase tracking-widest mb-4">Trusted by</p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {TRUSTED_LOGOS.map((logo) => (
@@ -246,7 +247,7 @@ export default function HomePage() {
       </section>
 
       {/* Servicios */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 surface-glass glass-dirty glass-highlight">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 surface-glass glass-highlight">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white">
@@ -256,7 +257,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {SERVICIOS.map((servicio) => (
-              <div key={servicio.titulo} className="p-6 glass-card glass-dirty glass-highlight hover:border-accent/30 transition-all">
+              <div key={servicio.titulo} className="p-6 glass-card glass-highlight hover:border-accent/30 transition-all">
                 <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
                   <servicio.icono className="w-6 h-6 text-accent" />
                 </div>

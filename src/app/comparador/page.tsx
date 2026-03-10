@@ -149,7 +149,7 @@ export default function ComparadorPage() {
 
     return (
         <div className="min-h-screen px-4 py-8 sm:py-12 lg:px-8">
-            <div className="max-w-7xl mx-auto surface-glass glass-dirty glass-highlight rounded-3xl p-6 sm:p-8 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto surface-glass glass-highlight rounded-3xl p-6 sm:p-8 relative overflow-hidden">
                 {/* Header */}
                 <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
@@ -187,7 +187,7 @@ export default function ComparadorPage() {
 
                         {/* Columnas Dinámicas para cada auto en Comparación */}
                         {vehiculos.map((v) => (
-                            <div key={v.id} className="col-span-1 glass-card glass-dirty glass-highlight p-4 flex flex-col animate-fade-in relative hover:border-white/10 transition-colors group">
+                            <div key={v.id} className="col-span-1 glass-card glass-highlight p-4 flex flex-col animate-fade-in relative hover:border-white/10 transition-colors group">
                                 <button
                                     onClick={() => quitarVehiculo(v.id)}
                                     className="absolute -top-3 -right-3 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-xl z-20"

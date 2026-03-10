@@ -149,7 +149,7 @@ export default function CatalogoPage() {
     return (
         <div className="min-h-screen">
             {/* Header */}
-            <div className="surface-glass glass-dirty glass-highlight border-b border-white/10">
+            <div className="surface-glass glass-highlight border-b border-white/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <h1 className="text-3xl sm:text-4xl font-bold text-white">
                         Nuestro <span className="text-accent">Catálogo</span>
@@ -210,7 +210,7 @@ export default function CatalogoPage() {
 
                     {/* Panel de filtros */}
                     {mostrarFiltros && (
-                        <div className="mt-4 p-4 glass-card glass-dirty glass-highlight rounded-xl animate-fade-in">
+                        <div className="mt-4 p-4 glass-card glass-highlight rounded-xl animate-fade-in">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium text-muted mb-2">Marca</label>

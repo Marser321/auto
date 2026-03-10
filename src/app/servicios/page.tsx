@@ -114,7 +114,7 @@ export default function ServiciosPage() {
             </section>
 
             {/* Valores / Confianza */}
-            <section className="py-24 surface-glass glass-dirty glass-highlight relative">
+            <section className="py-24 surface-glass glass-highlight relative">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                         {[
@@ -122,7 +122,7 @@ export default function ServiciosPage() {
                             { icono: Shield, titulo: 'Calidad', desc: 'Equipamiento de cine y post-producción profesional.' },
                             { icono: Play, titulo: 'Visibilidad', desc: 'Multiplicá x5 tus consultas comparado con fotos de celular.' }
                         ].map(item => (
-                            <div key={item.titulo} className="p-8 glass-card glass-dirty glass-highlight rounded-3xl">
+                            <div key={item.titulo} className="p-8 glass-card glass-highlight rounded-3xl">
                                 <item.icono className="w-10 h-10 text-accent mx-auto mb-4" />
                                 <h3 className="text-xl font-bold text-white mb-2">{item.titulo}</h3>
                                 <p className="text-muted text-sm leading-relaxed">{item.desc}</p>

@@ -78,7 +78,7 @@ export default function ContactoPage() {
 
     return (
         <div className="min-h-screen">
-            <div className="surface-glass glass-dirty glass-highlight border-b border-white/10">
+            <div className="surface-glass glass-highlight border-b border-white/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <h1 className="text-3xl sm:text-4xl font-bold text-white">
                         <span className="text-accent">Contactanos</span>
@@ -91,7 +91,7 @@ export default function ContactoPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Formulario */}
                     <div className="lg:col-span-2">
-                        <form onSubmit={handleSubmit} className="glass-card glass-dirty glass-highlight rounded-2xl p-6 sm:p-8 space-y-5">
+                        <form onSubmit={handleSubmit} className="glass-card glass-highlight rounded-2xl p-6 sm:p-8 space-y-5">
                             {error && (
                                 <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-sm text-red-300">{error}</div>
                             )}

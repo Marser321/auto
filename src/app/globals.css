@@ -58,33 +58,17 @@
 
   .glass-effect {
     @apply bg-white/5 backdrop-blur-lg border border-white/10;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.32);
   }
 
   .glass-panel {
-    @apply bg-white/5 backdrop-blur-xl border border-white/15 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.45)] relative overflow-hidden;
+    @apply bg-white/6 backdrop-blur-xl border border-white/15 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.38)] relative overflow-hidden;
   }
 
   .surface-glass {
-    background-color: rgba(2, 6, 23, 0.7);
+    background-color: rgba(2, 6, 23, 0.62);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .glass-dirty {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-  }
-
-  .glass-dirty::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("/demo/textures/noise.png");
-    opacity: 0.18;
-    mix-blend-mode: soft-light;
-    pointer-events: none;
   }
 
   .glass-highlight::after {
