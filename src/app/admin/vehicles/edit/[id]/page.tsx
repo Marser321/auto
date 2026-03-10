@@ -303,7 +303,7 @@ export default function EditVehiclePage() {
                                     <div key={i} className="relative aspect-square group">
                                         <img
                                             src={img.preview}
-                                            alt={`Imagen ${index + 1}`}
+                                            alt={`Imagen ${i + 1}`}
                                             className="w-full h-full object-cover rounded-xl border border-white/10"
                                         />
                                         <button
