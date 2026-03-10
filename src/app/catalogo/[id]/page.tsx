@@ -188,6 +188,7 @@ export default function VDPPage() {
         { icono: Hash, label: 'VIN', valor: vehiculo.vin },
     ];
 
+    const tiene360 = Boolean(vehiculo.imagen_360_url);
     const badges = vehiculo.badges?.length ? vehiculo.badges : (tiene360 ? ['360'] : []);
 
     // JSON-LD
@@ -207,8 +208,6 @@ export default function VDPPage() {
         image: imagenes[0]?.url,
         description: vehiculo.descripcion,
     };
-
-    const tiene360 = Boolean(vehiculo.imagen_360_url);
 
     return (
         <>
